@@ -1,4 +1,7 @@
 <html>
+  <head>
+    <script  type="text/javascript" src="https://static.mydigipass.com/en/dp_connect.js"></script>
+  </head>
   <body>
     <h1>Authenticated via provider '<%= @auth.provider %>'</h1>
     <h2>Info</h2>
@@ -8,7 +11,7 @@
       <% end %>
     </ul>
 
-    <a href="/signout" class="dpplus-logout" data-origin="<%= OMNIAUTH_CLIENT_OPTIONS[:site] %>" data-client-id="<%= CLIENT_ID %>">Sign out</a>
+    <a href="/signout" class="dpplus-logout" data-client-id="<%= CLIENT_ID %>">Sign out</a>
 
     <h2>Raw auth information</h2>
     <pre style="white-space: pre-wrap"><%= Rack::Utils.escape_html @auth.inspect %></pre>
