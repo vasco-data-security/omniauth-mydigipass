@@ -2,8 +2,8 @@
 require File.expand_path('../lib/omniauth-mydigipass/version', __FILE__)
 
 Gem::Specification.new do |gem|
-  gem.authors       = ["Nathan Van der Auwera"]
-  gem.email         = ["nathan@dixis.com"]
+  gem.authors       = ["Nathan Van der Auwera", "Toon Nevelsteen"]
+  gem.email         = ["toon.nevelsteen@vasco.com"]
   gem.summary       = %Q{OmniAuth strategy for MYDIGIPASS.COM}
   gem.description   = %Q{OmniAuth strategy for MYDIGIPASS.COM, which can be used for sandbox or production}
   gem.homepage      = "https://github.com/vasco-data-security/omniauth-mydigipass"

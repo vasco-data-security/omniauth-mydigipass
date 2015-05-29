@@ -31,12 +31,20 @@ module OmniAuth
       end
 
       extra do
-        { 'raw_info' => raw_info }
+        { 
+          :raw_info => raw_info,
+          :eid_data => raw_eid_info
+         }
       end
 
       def raw_info
         @raw_info ||= access_token.get('/oauth/user_data').parsed
       end
+
+      def raw_eid_info
+        @raw_eid_info ||= access_token.get('/oauth/eid_data').parsed
+      end
+
     end
   end
 end
