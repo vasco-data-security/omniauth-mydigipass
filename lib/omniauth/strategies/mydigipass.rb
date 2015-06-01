@@ -7,9 +7,9 @@ module OmniAuth
       def self.default_client_urls(options = { })
         base_uri = ::Mydigipass::Tools.extract_base_uri_from_options(options)
         {
-          :site          => base_uri,
-          :authorize_url => base_uri + '/oauth/authenticate',
-          :token_url     => base_uri + '/oauth/token'
+          :site               => base_uri,
+          :authorize_url      => base_uri + '/oauth/authenticate',
+          :token_url          => base_uri + '/oauth/token',
         }
       end
 
@@ -42,6 +42,7 @@ module OmniAuth
       end
 
       def raw_eid_info
+        return {} unless options[:client_options][:retrieve_eid_data]
         @raw_eid_info ||= access_token.get('/oauth/eid_data').parsed
       end
 

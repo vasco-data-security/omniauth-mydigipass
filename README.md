@@ -49,7 +49,10 @@ Inside your `config/application.rb` add the following (e.g. at the bottom, insid
 ```ruby
 # enable omniauth strategies
 Rails.application.config.middleware.use OmniAuth::Builder do
-  provider :mydigipass, MDP_CLIENT_ID, MDP_CLIENT_SECRET
+  provider  :mydigipass, MDP_CLIENT_ID, MDP_CLIENT_SECRET, 
+            client_options: {
+                : retrieve_eid_data => true
+            }
 end
 ```
 
