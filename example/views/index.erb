@@ -9,6 +9,9 @@
       <%- @auth.info.each do |key, value| %>
         <li><strong><%= key %>:</strong> <%= value.inspect %></li>
       <% end %>
+      <% @auth.extra.eid_data.each do |key, value| %>
+          <li><strong><%= key %>:</strong> <%= value.inspect %></li>
+      <% end %>
     </ul>
 
     <a href="/signout" class="dpplus-logout" data-client-id="<%= CLIENT_ID %>">Sign out</a>
