@@ -38,12 +38,19 @@ module OmniAuth
       end
 
       def raw_info
-        @raw_info ||= access_token.get('/oauth/user_data').parsed
+        if options[:client_options][:retrieve_user_data]
+          @raw_info ||= access_token.get('/oauth/user_data').parsed
+        else
+          {}
+        end
       end
 
       def raw_eid_info
-        return {} unless options[:client_options][:retrieve_eid_data]
-        @raw_eid_info ||= access_token.get('/oauth/eid_data').parsed
+        if options[:client_options][:retrieve_eid_data]
+          @raw_eid_info ||= access_token.get('/oauth/eid_data').parsed
+        else
+          {}
+        end
       end
 
     end

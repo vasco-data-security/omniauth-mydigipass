@@ -8,7 +8,15 @@ require 'mydigipass'
 CLIENT_ID = 'YOUR-CLIENT-ID-HERE'
 CLIENT_SECRET = 'YOUR-CLIENT-SECRET-HERE'
 
-OMNIAUTH_CLIENT_OPTIONS = OmniAuth::Strategies::Mydigipass.default_client_urls
+# Setting which data endpoints should be contacted after access_token is received
+# see https://developer.mydigipass.com/secure_connect_api_reference (user_data, eid_data)
+ENDPOINT_OPTIONS = {
+                     retrieve_user_data: true,
+                     retrieve_eid_data: false
+                   }
+
+# You shouldn't have to change anything below here
+DEFAULT_URLS = OmniAuth::Strategies::Mydigipass.default_client_urls
 CONNECT_API_OPTIONS = { :client_id => CLIENT_ID, :client_secret => CLIENT_SECRET }
 
 class App < Sinatra::Base
@@ -56,7 +64,7 @@ end
 
 use Rack::Session::Cookie, secret: 'verysecret'
 use OmniAuth::Builder do
-  provider :mydigipass, CLIENT_ID, CLIENT_SECRET, :client_options => OMNIAUTH_CLIENT_OPTIONS
+  provider :mydigipass, CLIENT_ID, CLIENT_SECRET, :client_options => DEFAULT_URLS.merge(ENDPOINT_OPTIONS)
 end
 
 run App.new
