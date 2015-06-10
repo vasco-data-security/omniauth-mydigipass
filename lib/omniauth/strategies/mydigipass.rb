@@ -1,5 +1,7 @@
 require 'omniauth-oauth2'
 require 'mydigipass/tools'
+require 'mydigipass/resource'
+require 'mydigipass/eid_resource'
 
 module OmniAuth
   module Strategies
@@ -17,25 +19,15 @@ module OmniAuth
       option :client_options, default_client_urls
 
       # These are called after authentication has succeeded.
-      uid { raw_info['uuid'] }
+      uid { access_token['uuid'] }
 
       info do
         {
-          :name => "#{raw_info['first_name']} #{raw_info['last_name']}",
-          :email => raw_info['email'],
-          :nickname => raw_info['login'],
-          :first_name => raw_info['first_name'],
-          :last_name => raw_info['last_name'],
-          :location => "#{raw_info['address_1']}, #{raw_info['zip']} #{raw_info['city']}, #{raw_info['country']}",
+          :uuid => access_token['uuid'],
+          :profile => ::Mydigipass::Resource.new(access_token, "/oauth/user_data"),
+          :eid_data => ::Mydigipass::EidResource.new(access_token, "/oauth/eid_data"),
+          :eid_photo => ::Mydigipass::EidResource.new(access_token, "/oauth/eid_photo_data")
         }
-      end
-
-      extra do
-        { 'raw_info' => raw_info }
-      end
-
-      def raw_info
-        @raw_info ||= access_token.get('/oauth/user_data').parsed
       end
     end
   end
