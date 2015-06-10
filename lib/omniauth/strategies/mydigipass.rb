@@ -2,6 +2,7 @@ require 'omniauth-oauth2'
 require 'mydigipass/tools'
 require 'mydigipass/resource'
 require 'mydigipass/eid_resource'
+require 'mydigipass/eid_photo_resource'
 
 module OmniAuth
   module Strategies
@@ -26,7 +27,7 @@ module OmniAuth
           :uuid => access_token['uuid'],
           :profile => ::Mydigipass::Resource.new(access_token, "/oauth/user_data"),
           :eid_data => ::Mydigipass::EidResource.new(access_token, "/oauth/eid_data"),
-          :eid_photo => ::Mydigipass::EidResource.new(access_token, "/oauth/eid_photo_data")
+          :eid_photo => ::Mydigipass::EidPhotoResource.new(access_token, "/oauth/eid_photo_data")
         }
       end
     end
