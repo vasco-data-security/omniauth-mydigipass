@@ -7,8 +7,13 @@ module Mydigipass
     # @param [String] etag
     # @return [Hash] eid data attributes
     def fetch_data(etag)
-      headers = etag_header(etag)
-      data(resource_url, headers: headers).parsed
+      headers = {}
+
+      if etag
+        headers = { headers: etag_header(etag) }
+      end
+
+      data(resource_url, headers).parsed
     end
 
     protected
