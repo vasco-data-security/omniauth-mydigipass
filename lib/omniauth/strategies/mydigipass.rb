@@ -25,6 +25,7 @@ module OmniAuth
       info do
         {
           :uuid => access_token['uuid'],
+          :scope => access_token['scope'],
           :profile => ::Mydigipass::Resource.new(access_token, "/oauth/user_data"),
           :eid_data => ::Mydigipass::EidResource.new(access_token, "/oauth/eid_data"),
           :eid_photo => ::Mydigipass::EidPhotoResource.new(access_token, "/oauth/eid_photo_data")
