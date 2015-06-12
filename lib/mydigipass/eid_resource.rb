@@ -16,6 +16,7 @@ module Mydigipass
     def etag_header(etag)
       headers = {}
       headers['Etag'] = etag unless etag.nil?
+      headers
     end
   end
 end
